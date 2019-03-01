@@ -126,11 +126,11 @@ for episode in range(n_max_episodes):
             break
     episode_reward = sum(rewards)
     episode_rewards.append(episode_reward)
-    states = np.array(states).reshape(-1, 4)
-    discount_rewards = discount_reward(rewards).reshape(-1, 1)
-    actions = np.array(actions).reshape(-1, 1)
+    states = np.array(states).reshape(-1, 4)  # 将矩阵reshape为4*x大小
+    discount_rewards = discount_reward(rewards).reshape(-1, 1)  # 将矩阵reshape为1*x大小
+    actions = np.array(actions).reshape(-1, 1)  # 动作
     X = [states, actions, discount_rewards]
-    batch_size = len(states)
+    batch_size = len(states)  # 矩阵行数
     assert batch_size == len(actions)
     assert batch_size == len(discount_rewards)
     y = [dummy_loss_output(batch_size), dummy_action_output(batch_size)]

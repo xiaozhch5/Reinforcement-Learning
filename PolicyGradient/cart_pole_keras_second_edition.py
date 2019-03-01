@@ -29,7 +29,7 @@ print('num actions={}'.format(n_actions))
 
 def my_loss(arg):
     action_pred, action_true, discount_episode_reward = arg
-    action_true = K.cast(action_true, dtype=tf.int32)
+    action_true = K.cast(action_true, dtype=tf.int32)  # 将张量转换到不同的dtype并返回
     loss = K.sparse_categorical_crossentropy(action_true, action_pred)
     loss = loss * K.flatten(discount_episode_reward)
     return loss
@@ -131,9 +131,10 @@ for episode in range(n_max_episodes):
     actions = np.array(actions).reshape(-1, 1)
     X = [states, actions, discount_rewards]
     batch_size = len(states)
-    assert batch_size == len(actions)
-    assert batch_size == len(discount_rewards)
+    assert batch_size == len(actions)  # 判断左右两个是否相等
+    assert batch_size == len(discount_rewards)  # 判断左右两个是否相等
     y = [dummy_loss_output(batch_size), dummy_action_output(batch_size)]
+    print(y)
     model.fit(X, y, batch_size=batch_size, verbose=0)
     if episode_reward > best_reward:
         best_reward = episode_reward

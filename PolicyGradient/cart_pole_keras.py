@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import numpy as np
 import gym
 from keras.layers import Input, Dense, Lambda
@@ -112,7 +113,7 @@ for episode in range(n_max_episodes):
     observation = env.reset()
     state = preprocess(observation)
     for step in range(n_max_steps):
-        _, action_output = model.predict([state, dummy_action_input(), dummy_reward_input()])
+        _, action_output = model.predict([state, dummy_action_input(), dummy_reward_input()])  # 这边
         action = np.random.choice(np.array(range(n_actions)), size=1, p=action_output.ravel())
         observation, reward, done, _ = env.step(action[0])
         #if done:

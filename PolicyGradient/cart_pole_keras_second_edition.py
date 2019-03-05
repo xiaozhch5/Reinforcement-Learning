@@ -1,3 +1,5 @@
+# -*- coding：UTF-8 -*-
+
 import numpy as np
 import gym
 from keras.layers import Input, Dense, Lambda
